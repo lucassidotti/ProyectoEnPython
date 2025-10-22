@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+}
+.encabezado{
+    height: 100px;
+}
+.tablero {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 100px);
+  background-color: #4b6349;
+}
+
+.dealer {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 100px;
+  border: 2px dashed rgba(255,255,255,0.5);
+  border-radius: 50%;
+}
+
+.jugador {
+  position: absolute;
+  width: 60px;
+  height: 90px;
+  border: 2px dotted yellow;
+  border-radius: 8px;
+  left: calc(10% + 80% * var(--i)/4);
+  bottom: calc(90px - 40px * (1 - 2*var(--i)/4) * (1 - 2*var(--i)/4));
+}
+
+.carta1{
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  bottom: 200px;
+  left: 45%;
+  transform: translateX(-50%);
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+.carta2{
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  bottom: 200px;
+  left: 55%;
+  transform: translateX(-50%);
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+.info-jugador{
+  position: absolute;
+  width: 150px;
+  height: auto;
+  bottom: 200px;
+  left: 10%;
+  transform: translateX(-50%);
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 10px;
+  padding: 0.5em;
+}
+.acciones{
+  display: flex;
+  position: absolute;
+  width: 320px;
+  height: auto;
+  bottom: 200px;
+  left: 30%;
+  gap: 0.5em;
+  transform: translateX(-50%);
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 10px;
+  padding: 0.5em;
+}
+
+
+
+
+footer{
+    height: 200px;
+    background: #121212;
+}
