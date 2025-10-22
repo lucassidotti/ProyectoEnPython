@@ -1,90 +1,163 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
-.encabezado{
-    height: 100px;
+
+.encabezado {
+  height: 100px;
 }
+
+/* Tablero */
 .tablero {
-  position: relative;
+  display: grid;
+  grid-template-areas:
+    "dealer dealer"
+    "jugada jugada"
+    "info acciones";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 1.5em;
   width: 100%;
   height: calc(100vh - 100px);
-  background-color: #4b6349;
+  background-color: #4b6349; /* Tu verde original */
+  padding: 1.5em;
 }
 
+/* Dealer */
 .dealer {
-  position: absolute;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 100px;
-  border: 2px dashed rgba(255,255,255,0.5);
-  border-radius: 50%;
+  grid-area: dealer;
+  text-align: center;
+  font-size: 1.4em;
+  color: white;
+  padding: 0.8em;
+  border-radius: 0.8em;
+  border: 2px dashed rgba(255, 255, 255, 0.4);
 }
 
-.jugador {
-  position: absolute;
-  width: 60px;
-  height: 90px;
-  border: 2px dotted yellow;
-  border-radius: 8px;
-  left: calc(10% + 80% * var(--i)/4);
-  bottom: calc(90px - 40px * (1 - 2*var(--i)/4) * (1 - 2*var(--i)/4));
-}
-
-.carta1{
-  position: absolute;
-  width: 150px;
-  height: 200px;
-  bottom: 200px;
-  left: 45%;
-  transform: translateX(-50%);
-  border: 2px dashed rgba(255,255,255,0.3);
-  border-radius: 10px;
-}
-.carta2{
-  position: absolute;
-  width: 150px;
-  height: 200px;
-  bottom: 200px;
-  left: 55%;
-  transform: translateX(-50%);
-  border: 2px dashed rgba(255,255,255,0.3);
-  border-radius: 10px;
-}
-.info-jugador{
-  position: absolute;
-  width: 150px;
-  height: auto;
-  bottom: 200px;
-  left: 10%;
-  transform: translateX(-50%);
-  border: 2px dashed rgba(255,255,255,0.3);
-  border-radius: 10px;
-  padding: 0.5em;
-}
-.acciones{
+.cartas-d {
   display: flex;
-  position: absolute;
-  width: 320px;
-  height: auto;
-  bottom: 200px;
-  left: 30%;
-  gap: 0.5em;
-  transform: translateX(-50%);
-  border: 2px dashed rgba(255,255,255,0.3);
-  border-radius: 10px;
-  padding: 0.5em;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-top: 0.5em;
 }
 
+/* Mano */
+.jugada {
+  grid-area: jugada;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
+.total {
+  position: absolute;
+  top: -1em;
+  font-size: 1.3em;
+  color: #fff;
+  font-weight: 600;
+}
 
+.carta1,
+.carta2 {
+  width: 150px;
+  height: 200px;
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 10px;
+  background-color: #fefefe;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  margin: 0 0.8em;
+  transition: transform 0.2s ease;
+}
+
+.carta1 {
+  transform: rotate(-5deg);
+}
+
+.carta2 {
+  transform: rotate(5deg);
+}
+
+/* Info jugador */
+.info-jugador {
+  grid-area: info;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 10px;
+  padding: 1em;
+  color: #fff;
+  font-size: 1.1em;
+}
+
+.cont-apuesta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+/* Fichas */
+.cont-ficha {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.ficha {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  border: none;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+
+.ficha:nth-child(1) { background-color: #c0392b; } 
+.ficha:nth-child(2) { background-color: #2980b9; } 
+.ficha:nth-child(3) { background-color: #27ae60; } 
+.ficha:nth-child(4) { background-color: #f39c12; } 
+.ficha:nth-child(5) { background-color: #8e44ad; } 
+
+.ficha:hover {
+  transform: scale(1.1);
+}
+
+/*Menu de acciones*/
+.acciones {
+  grid-area: acciones;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 10px;
+  padding: 0.8em;
+}
+
+.acciones button {
+  font-size: 1em;
+  padding: 0.6em 1.2em;
+  border: none;
+  border-radius: 0.5em;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.1s ease
+}
+
+.acciones button:hover {
+  transform: scale(1.05);
+}
 
 footer{
-    height: 200px;
-    background: #121212;
+  background-color: #121212;
+  height: 200px;
 }
