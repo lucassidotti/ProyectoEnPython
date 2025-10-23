@@ -18,28 +18,54 @@ mazo = [
 ]
 
 figuras=['J','Q','K']
-
-random.shuffle(mazo)
+valores_numericos = [2,3,4,5,6,7,8,9,10]
 mano=[]
 mano_d=[]
 descarte=[]
-for _ in range(2):
-    carta=mazo[0]
-    mano.append(carta)
-    descarte.append(mazo.pop(0))
-    carta_d=mazo[0]
-    mano_d.append(carta_d)
-    descarte.append(mazo.pop(0))
+def barajar():
 
-valor = list(carta.keys())[0]
-if valor in figuras:
-    valor=10
-if valor == int:
-    valor=valor
+    random.shuffle(mazo)
+    
+    for _ in range(2):
+        carta=mazo[0]
+        mano.append(carta)
+        descarte.append(mazo.pop(0))
+        carta_d=mazo[0]
+        mano_d.append(carta_d)
+        descarte.append(mazo.pop(0))
+    return
+barajar()
+
+def calcular_mano(mano):
+    parcial=0
+    for carta in mano:
+        valor = list(carta.keys())[0]
+        if valor in figuras:
+            puntaje=10
+            parcial+=puntaje
+        elif valor in valores_numericos:
+            puntaje=valor
+            parcial+=puntaje
+        if valor == 'A':
+            if parcial <= 10:
+                puntaje = 11
+                parcial += puntaje
+            else:
+                puntaje = 1       
+    return parcial
+
+puntaje_jugador=calcular_mano(mano)
+puntaje_dealer=calcular_mano(mano_d)     
+
+        
+
+    
+
 
 
 
 print(mano)
+print(puntaje_jugador)
 print(mano_d)
+print(puntaje_dealer)
 print(descarte)
-print(valor)
