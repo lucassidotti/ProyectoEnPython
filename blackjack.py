@@ -54,18 +54,40 @@ def calcular_mano(mano):
                 puntaje = 1       
     return parcial
 
+
+apuestas={1:5, 2:10, 3:25, 4:50, 5:100}
+saldo=int(input("Ingrese la cantidad de fichas que quiere comprar: "))
+fichas=int(input(" 1. 5 \n 2. 10 \n 3. 25 \n 4. 50 \n 5. 100 \n"))
+if fichas in apuestas:
+    apuesta_actual=apuestas[fichas]
+    saldo=saldo-apuesta_actual
+    print(f"Su saldo es: {saldo}")
+    print(f"Usted aposto {apuesta_actual} fichas")
+
 puntaje_jugador=calcular_mano(mano)
 puntaje_dealer=calcular_mano(mano_d)     
 
-        
+print(f"Tu mano: {mano}")
+print(f"Puntaje: {puntaje_jugador}")
+print(f"El dealer muestra {mano_d[0]}")
 
+def turno_jugador():
+    acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n 3.Doblar \n")))
+    if acciones == 1:
+        puntaje_jugador = calcular_mano(mano)
+        while puntaje_jugador < 21:
+            n_carta=mazo.pop(0)
+            mano.append(n_carta)
+            descarte.append(n_carta)
+            puntaje_jugador = calcular_mano(mano)
+            print(mano)
+            print(puntaje_jugador)
+            acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n")))
+    else: print("algo")
+turno_jugador()
+    
+    
     
 
 
 
-
-print(mano)
-print(puntaje_jugador)
-print(mano_d)
-print(puntaje_dealer)
-print(descarte)
