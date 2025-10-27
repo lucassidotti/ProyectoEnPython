@@ -71,20 +71,47 @@ print(f"Tu mano: {mano}")
 print(f"Puntaje: {puntaje_jugador}")
 print(f"El dealer muestra {mano_d[0]}")
 
-def turno_jugador():
+def turno_jugador(saldo,apuesta_actual):
     acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n 3.Doblar \n")))
-    if acciones == 1:
-        puntaje_jugador = calcular_mano(mano)
-        while puntaje_jugador < 21:
+    puntaje_jugador = calcular_mano(mano)
+
+    if acciones == 3:
+        if saldo>=apuesta_actual:
+            saldo-=apuesta_actual
+            apuesta_actual*=2
+            print(f"¡Dobló la apuesta a: {apuesta_actual}")
             n_carta=mazo.pop(0)
             mano.append(n_carta)
             descarte.append(n_carta)
-            puntaje_jugador = calcular_mano(mano)
-            print(mano)
-            print(puntaje_jugador)
+            puntaje_jugador=calcular_mano(mano)
+            print(f"Su mano: {mano} | Puntaje: {puntaje_jugador}")
+    while True:
+        if acciones==1:
+            n_carta=mazo.pop(0)
+            mano.append(n_carta)
+            descarte.append(n_carta)
+            puntaje_jugador=calcular_mano(mano)
+            print(f"Su mano: {mano} | Puntaje: {puntaje_jugador}")
+            if puntaje_jugador>21:
+                print(f"¡Bust! Usted pierde, su puntaje: {puntaje_jugador}")
+                break
+            elif puntaje_jugador==21:
+                print(f"¡BlackJack! {puntaje_jugador}")
+                saldo+=apuesta_actual
+                print(f"Su saldo es: {saldo}")
+            else:
+                acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n")))
+        elif acciones==2:
+            print(f"El jugador se planta con: {puntaje_jugador}")
+            break
+        else:
+            print("Opcion no valida")
             acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n")))
-    else: print("algo")
-turno_jugador()
+    return puntaje_jugador
+turno_jugador(saldo,apuesta_actual)
+
+
+
     
     
     
