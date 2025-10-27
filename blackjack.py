@@ -115,6 +115,23 @@ def turno_jugador(saldo,apuesta_actual):
     return saldo,puntaje_jugador,apuesta_actual
 turno_jugador(saldo,apuesta_actual)
 
+def turno_dealer(mano_d,mazo,puntaje_dealer):
+    puntaje_dealer=calcular_mano(mano_d)
+    print(f"Mano del dealer: {mano_d} | Puntaje: {puntaje_dealer}")
+    while puntaje_dealer < 17:
+        n_carta=mazo.pop(0)
+        mano_d.append(n_carta)
+        descarte.append(n_carta)
+        puntaje_dealer=calcular_mano(mano_d)
+        print(f"El dealer pide una carta... {mano_d}")
+        if puntaje_dealer >21:
+            print(f"¡El dealer se pasa! {mano_d} | {puntaje_dealer}")
+        else:
+            print(f"El dealer se planta con: {mano_d} | {puntaje_dealer}")
+            
+    return puntaje_dealer
+turno_dealer(mano_d,mazo,puntaje_dealer)
+
 
 
     
