@@ -18,7 +18,6 @@ mazo = [
 ]
 
 figuras=['J','Q','K']
-valores_numericos = [2,3,4,5,6,7,8,9,10]
 mano=[]
 mano_d=[]
 descarte=[]
@@ -38,20 +37,19 @@ barajar()
 
 def calcular_mano(mano):
     parcial=0
+    ases=0
     for carta in mano:
         valor = list(carta.keys())[0]
         if valor in figuras:
-            puntaje=10
-            parcial+=puntaje
-        elif valor in valores_numericos:
-            puntaje=valor
-            parcial+=puntaje
-        if valor == 'A':
-            if parcial <= 10:
-                puntaje = 11
-                parcial += puntaje
-            else:
-                puntaje = 1       
+            parcial+=10
+        elif valor=='A':
+            parcial+=11
+            ases+=1
+        else:
+            parcial+=valor
+    while parcial >21 and ases >0:
+        parcial-=10
+        ases-=1
     return parcial
 
 
@@ -75,17 +73,22 @@ def turno_jugador(saldo,apuesta_actual):
     acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n 3.Doblar \n")))
     puntaje_jugador = calcular_mano(mano)
 
-    if acciones == 3:
-        if saldo>=apuesta_actual:
-            saldo-=apuesta_actual
-            apuesta_actual*=2
-            print(f"¡Dobló la apuesta a: {apuesta_actual}")
-            n_carta=mazo.pop(0)
-            mano.append(n_carta)
-            descarte.append(n_carta)
-            puntaje_jugador=calcular_mano(mano)
-            print(f"Su mano: {mano} | Puntaje: {puntaje_jugador}")
+   
     while True:
+        if acciones == 3:
+            if saldo>=apuesta_actual:
+                saldo-=apuesta_actual
+                apuesta_actual*=2
+                print(f"¡Dobló la apuesta a: {apuesta_actual}")
+                n_carta=mazo.pop(0)
+                mano.append(n_carta)
+                descarte.append(n_carta)
+                puntaje_jugador=calcular_mano(mano)
+                print(f"Su mano: {mano} | Puntaje: {puntaje_jugador}")
+            if puntaje_jugador>21:
+                print(f"¡Bust! Usted pierde, su puntaje: {puntaje_jugador}")
+                print(saldo)
+                break
         if acciones==1:
             n_carta=mazo.pop(0)
             mano.append(n_carta)
@@ -94,20 +97,22 @@ def turno_jugador(saldo,apuesta_actual):
             print(f"Su mano: {mano} | Puntaje: {puntaje_jugador}")
             if puntaje_jugador>21:
                 print(f"¡Bust! Usted pierde, su puntaje: {puntaje_jugador}")
+                print(saldo)
                 break
             elif puntaje_jugador==21:
                 print(f"¡BlackJack! {puntaje_jugador}")
                 saldo+=apuesta_actual
                 print(f"Su saldo es: {saldo}")
+                break
             else:
                 acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n")))
         elif acciones==2:
             print(f"El jugador se planta con: {puntaje_jugador}")
+            print("Esperar al turno del dealer...")
             break
         else:
-            print("Opcion no valida")
             acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n")))
-    return puntaje_jugador
+    return saldo,puntaje_jugador,apuesta_actual
 turno_jugador(saldo,apuesta_actual)
 
 
