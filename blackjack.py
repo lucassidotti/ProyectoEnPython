@@ -70,50 +70,49 @@ print(f"Puntaje: {puntaje_jugador}")
 print(f"El dealer muestra {mano_d[0]}")
 
 def turno_jugador(saldo,apuesta_actual):
-    acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n 3.Doblar \n")))
     puntaje_jugador = calcular_mano(mano)
 
-   
-    while True:
-        if acciones == 3:
-            if saldo>=apuesta_actual:
-                saldo-=apuesta_actual
-                apuesta_actual*=2
-                print(f"¡Dobló la apuesta a: {apuesta_actual}")
+    if puntaje_jugador==21:
+        print(f"¡BlackJack! {puntaje_jugador}")
+        saldo+=int(apuesta_actual*1.5)
+        print(f"Su saldo es: {saldo}")
+        return saldo,puntaje_jugador, apuesta_actual
+    else:
+        acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n 3.Doblar \n")))
+        while True:
+            if acciones == 3:
+                if saldo>=apuesta_actual:
+                    saldo-=apuesta_actual
+                    apuesta_actual*=2
+                    print(f"¡Dobló la apuesta a: {apuesta_actual}")
+                    n_carta=mazo.pop(0)
+                    mano.append(n_carta)
+                    descarte.append(n_carta)
+                    puntaje_jugador=calcular_mano(mano)
+                    print(f"Su mano: {mano} | Puntaje: {puntaje_jugador}")
+                    if puntaje_jugador>21:
+                        print(f"¡Bust! Usted pierde, su puntaje: {puntaje_jugador}")
+                        print(f"Su saldo es: {saldo}")
+                    break
+            if acciones==1:
                 n_carta=mazo.pop(0)
                 mano.append(n_carta)
                 descarte.append(n_carta)
                 puntaje_jugador=calcular_mano(mano)
                 print(f"Su mano: {mano} | Puntaje: {puntaje_jugador}")
-            if puntaje_jugador>21:
-                print(f"¡Bust! Usted pierde, su puntaje: {puntaje_jugador}")
-                print(saldo)
-                break
-        if acciones==1:
-            n_carta=mazo.pop(0)
-            mano.append(n_carta)
-            descarte.append(n_carta)
-            puntaje_jugador=calcular_mano(mano)
-            print(f"Su mano: {mano} | Puntaje: {puntaje_jugador}")
-            if puntaje_jugador>21:
-                print(f"¡Bust! Usted pierde, su puntaje: {puntaje_jugador}")
-                print(saldo)
-                break
-            elif puntaje_jugador==21:
-                print(f"¡BlackJack! {puntaje_jugador}")
-                saldo+=apuesta_actual
-                print(f"Su saldo es: {saldo}")
+                if puntaje_jugador>21:
+                    print(f"¡Bust! Usted pierde, su puntaje: {puntaje_jugador}")
+                    print(saldo)
+                    break
+                else:
+                    acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n")))
+            elif acciones==2:
+                print(f"El jugador se planta con: {puntaje_jugador}")
+                print("Esperar al turno del dealer...")
                 break
             else:
                 acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n")))
-        elif acciones==2:
-            print(f"El jugador se planta con: {puntaje_jugador}")
-            print("Esperar al turno del dealer...")
-            break
-        else:
-            acciones=(int(input("Que quiere hacer? \n 1.Pedir \n 2.Plantarse \n")))
-    return saldo,puntaje_jugador,apuesta_actual
-turno_jugador(saldo,apuesta_actual)
+        return saldo,puntaje_jugador,apuesta_actual
 
 def turno_dealer(mano_d,mazo,puntaje_dealer):
     puntaje_dealer=calcular_mano(mano_d)
@@ -130,8 +129,20 @@ def turno_dealer(mano_d,mazo,puntaje_dealer):
             print(f"El dealer se planta con: {mano_d} | {puntaje_dealer}")
             
     return puntaje_dealer
-turno_dealer(mano_d,mazo,puntaje_dealer)
 
+
+saldo, puntaje_jugador, apuesta_actual = turno_jugador(saldo,apuesta_actual)
+
+if puntaje_jugador <=21:
+    puntaje_dealer = turno_dealer(mano_d,mazo,puntaje_dealer)
+    if puntaje_dealer > puntaje_jugador and puntaje_dealer<21:
+        print(f"El dealer gana con: {puntaje_dealer}")
+    else: 
+        print(f"Usted gana con: {puntaje_jugador}")
+        
+        print(f"Su saldo actual es: {saldo}")
+else:
+    print(f"Termina el juego porque el jugador tiene: {puntaje_jugador}")
 
 
     
