@@ -13,13 +13,17 @@
     <div class="tablero">
         <div class="dealer">
             <p>Info dealer</p>
+            <div class="cartas-d">
+                {% for carta in cartas_dealer %}
+                <div class="carta">{{ carta }}</div>
+                {% endfor %}
+            </div>
         </div>
-        <div class="cartas-d"></div>
-
         <div class="jugada">
-            <span class="total">21</span>
-        <div class="carta1"></div>
-        <div class="carta2"></div>
+            <span class="total">{{puntaje_jugador}}</span>
+            {% for carta in mano %}
+            <div class="carta">{{ carta }}</div>
+            {% endfor %}
         </div>
 
         <div class="acciones">
@@ -31,8 +35,8 @@
 
         <div class="info-jugador">
             <div class="cont-apuesta">
-            <p class="saldo">Saldo:$ </p>
-            <p class="apuesta">Apuesta: </p>
+            <p class="saldo">Saldo: ${{saldo}}</p>
+            <p class="apuesta">Apuesta: {{apuesta}}</p>
             </div>
             <div class="cont-ficha">
             <button class="ficha">5</button>
