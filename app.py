@@ -1,0 +1,2 @@
+from flask import Flask, render_template, session, redirect, url_for, request
+from blackjack_logic import crear_mazo, barajar, calcular_mano, apuestas_jugador, black_jack_n, pedir, doblar, plantarse, turno_dealer, jugadas
