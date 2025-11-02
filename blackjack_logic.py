@@ -48,14 +48,14 @@ def calcular_mano(mano):
             parcial+=11
             ases+=1
         else:
-            parcial+=valor
+            parcial+=int(valor)
     while parcial >21 and ases >0:
         parcial-=10
         ases-=1
     return parcial
 
 def apuestas_jugador(saldo,fichas):
-    apuestas = {1:5, 2:10, 3:25, 4:50, 5:100}
+    apuestas = {5:5, 10:10, 25:25, 50:50, 100:100}
     if fichas in apuestas:
         apuesta_actual=apuestas[fichas]
         saldo=saldo-apuesta_actual

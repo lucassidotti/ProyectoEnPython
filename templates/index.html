@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PythonProyect</title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
 </head>
@@ -21,8 +21,8 @@
         </div>
         <div class="jugada">
             <span class="total">{{puntaje_jugador}}</span>
-            {% for carta in mano %}
-            <div class="carta">{{ carta }}</div>
+            {% for imagen in mano_imagen %}
+            <div class="carta1"><img src="{{ url_for('static', filename=imagen) }}" alt="carta"></div>
             {% endfor %}
         </div>
 
@@ -36,20 +36,22 @@
         <div class="info-jugador">
             <div class="cont-apuesta">
             <p class="saldo">Saldo: ${{saldo}}</p>
-            <p class="apuesta">Apuesta: {{apuesta}}</p>
+            <p class="apuesta">Apuesta: ${{apuesta}}</p>
             </div>
+            {% if not apuesta_actual %}
             <div class="cont-ficha">
-            <button class="ficha">5</button>
-            <button class="ficha">10</button>
-            <button class="ficha">25</button>
-            <button class="ficha">50</button>
-            <button class="ficha">100</button>
+            <a href="/partida/5"><button class="ficha">5</button></a>
+            <a href="/partida/10"><button class="ficha">10</button></a>
+            <a href="/partida/25"><button class="ficha">25</button></a>
+            <a href="/partida/50"><button class="ficha">50</button></a>
+            <a href="/partida/100"><button class="ficha">100</button></a>
             </div>
+            {% endif %}
         </div>
     </div>
 <footer>d</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<script src="javaScript/scripts.js"></script>
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>
