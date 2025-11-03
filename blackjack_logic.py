@@ -128,7 +128,17 @@ def jugadas(saldo,mano_d,mazo,apuesta_actual,mano,descarte):
         resultado="empate"
     return saldo, puntaje_jugador, puntaje_dealer, resultado
 
-
+def imagen_carta(mano,tapada=False):
+    imagenes=[]
+    for i, carta in enumerate(mano):
+        if tapada and i==0:
+            imagenes.append("imagenes/back_light.png")
+        else:
+            valor=list(carta.keys())[0]
+            palo=carta[valor]
+            ruta=f"imagenes/{palo}_{valor}.png"
+            imagenes.append(ruta)
+    return imagenes
 
 
 
