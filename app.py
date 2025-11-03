@@ -69,9 +69,6 @@ def partida(fichas):
                            cartas_dealer=mano_d,
                            puntaje_jugador=calcular_mano(mano))
 
-@app.route("/pedir")
-def pedir():
-    
 
 
 
