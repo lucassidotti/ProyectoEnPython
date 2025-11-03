@@ -37,7 +37,10 @@
   border-radius: 0.8em;
   border: 2px dashed rgba(255, 255, 255, 0.4);
 }
-
+.mazo {
+  display: flex;
+  margin-left: 0;
+}
 .cartas-d {
   display: flex;
   justify-content: center;
@@ -51,36 +54,22 @@
   grid-area: jugada;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   position: relative;
 }
 
 .total {
   position: absolute;
-  top: -1em;
+  top: 5em;
   font-size: 1.3em;
   color: #fff;
   font-weight: 600;
 }
 
-.carta1,
-.carta2 {
-  width: 150px;
-  height: 200px;
-  border: 2px dashed rgba(255,255,255,0.3);
-  border-radius: 10px;
-  background-color: #fefefe;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+.carta img{
+  width: auto;
+  height: auto;
   margin: 0 0.8em;
-  transition: transform 0.2s ease;
-}
-
-.carta1 {
-  transform: rotate(-5deg);
-}
-
-.carta2 {
-  transform: rotate(5deg);
 }
 
 /* Info jugador */
@@ -110,7 +99,7 @@
   gap: 0.6em;
 }
 
-.ficha {
+.ficha1, .ficha2, .ficha3, .ficha4, .ficha5 {
   width: 3em;
   height: 3em;
   border-radius: 50%;
@@ -122,11 +111,11 @@
   transition: transform 0.2s ease;
 }
 
-.ficha:nth-child(1) { background-color: #c0392b; } 
-.ficha:nth-child(2) { background-color: #2980b9; } 
-.ficha:nth-child(3) { background-color: #27ae60; } 
-.ficha:nth-child(4) { background-color: #f39c12; } 
-.ficha:nth-child(5) { background-color: #8e44ad; } 
+.ficha1 { background-color: #c0392b; } 
+.ficha2 { background-color: #2980b9; } 
+.ficha3 { background-color: #27ae60; } 
+.ficha4 { background-color: #f39c12; } 
+.ficha5 { background-color: #8e44ad; } 
 
 .ficha:hover {
   transform: scale(1.1);

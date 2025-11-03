@@ -12,17 +12,18 @@
     <header class="encabezado"></header>
     <div class="tablero">
         <div class="dealer">
-            <p>Info dealer</p>
+            <span>{{puntaje_dealer}}</span>
             <div class="cartas-d">
-                {% for carta in cartas_dealer %}
-                <div class="carta">{{ carta }}</div>
+                <div class="mazo"><img src="{{ url_for('static', filename='imagenes/back_dark.png') }}" alt="mazo"></div>
+                {% for imagen in mano_imagen_d %}
+                    <div class="carta"><img src="{{ url_for('static', filename=imagen) }}" alt="carta"></div>
                 {% endfor %}
             </div>
         </div>
         <div class="jugada">
             <span class="total">{{puntaje_jugador}}</span>
             {% for imagen in mano_imagen %}
-            <div class="carta1"><img src="{{ url_for('static', filename=imagen) }}" alt="carta"></div>
+                <div class="carta"><img src="{{ url_for('static', filename=imagen) }}" alt="carta"></div>
             {% endfor %}
         </div>
 
@@ -40,11 +41,11 @@
             </div>
             {% if not apuesta_actual %}
             <div class="cont-ficha">
-            <a href="/partida/5"><button class="ficha">5</button></a>
-            <a href="/partida/10"><button class="ficha">10</button></a>
-            <a href="/partida/25"><button class="ficha">25</button></a>
-            <a href="/partida/50"><button class="ficha">50</button></a>
-            <a href="/partida/100"><button class="ficha">100</button></a>
+            <a href="/partida/5"><button class="ficha1">5</button></a>
+            <a href="/partida/10"><button class="ficha2">10</button></a>
+            <a href="/partida/25"><button class="ficha3">25</button></a>
+            <a href="/partida/50"><button class="ficha4">50</button></a>
+            <a href="/partida/100"><button class="ficha5">100</button></a>
             </div>
             {% endif %}
         </div>

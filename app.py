@@ -28,12 +28,6 @@ def partida(fichas):
     mano=session.get("mano",[])
     mano_d=session.get("mano_d",[])
     descarte=session.get("descarte",[])
-    mano_imagen=[]
-    for carta in mano:
-        valor=list(carta.keys())[0]
-        palo=carta[valor]
-        ruta=f"imagenes/{palo}_{valor}.png"
-        mano_imagen.append(ruta)
 
     if not apuesta_actual:
         saldo, apuesta_actual=apuestas_jugador(saldo,fichas)
@@ -49,14 +43,35 @@ def partida(fichas):
         session["mano"]=mano
         session["mano_d"]=mano_d
         session["descarte"]=descarte
+
+    mano_imagen=[]
+    for carta in mano:
+        valor=list(carta.keys())[0]
+        palo=carta[valor]
+        ruta=f"imagenes/{palo}_{valor}.png"
+        mano_imagen.append(ruta)
+
+    mano_imagen_d=[]
+    for i, carta in enumerate(mano_d):
+        if i==0:
+            mano_imagen_d.append("imagenes/back_light.png")
+        else:
+            valor=list(carta.keys())[0]
+            palo=carta[valor]
+            ruta=f"imagenes/{palo}_{valor}.png"
+            mano_imagen_d.append(ruta)
+
     return render_template("index.html", 
                            saldo=saldo, 
-                           apuesta=apuesta_actual, 
+                           apuesta=apuesta_actual,
+                           mano_imagen_d=mano_imagen_d, 
                            mano_imagen=mano_imagen, 
                            cartas_dealer=mano_d,
                            puntaje_jugador=calcular_mano(mano))
 
-
+@app.route("/pedir")
+def pedir():
+    
 
 
 
