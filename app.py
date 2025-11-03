@@ -69,7 +69,28 @@ def partida(fichas):
                            cartas_dealer=mano_d,
                            puntaje_jugador=calcular_mano(mano))
 
+@app.route("/pedir")
+def pedir_c():
+    mazo=session.get("mazo",[])
+    mano=session.get("mano",[])
+    descarte=session.get("descarte",[])
+    carta=pedir(mano,mazo,descarte)
+    session["mazo"]=mazo
+    session["mano"]=mano
+    session["descarte"]=descarte
+    mano_imagen=[]
+    for carta in mano:
+        valor=list(carta.keys())[0]
+        palo=carta[valor]
+        ruta=f"imagenes/{palo}_{valor}.png"
+        mano_imagen.append(ruta)
 
+    return render_template("index.html",
+                            mano_imagen=mano_imagen,
+                            saldo=session["saldo"],
+                            apuesta=session["apuesta_actual"],
+                            puntaje_jugador=calcular_mano(mano)
+    )
 
 
 
