@@ -12,6 +12,18 @@
     <header class="encabezado"></header>
     <div class="tablero">
         <div class="dealer">
+        {% if resultado %}
+        <div class="resultado">
+            {% if resultado == "gana" %}
+                <p class="gana">¡Ganaste la mano!</p>
+            {% elif resultado == "pierde" %}
+                <p class="pierde">Perdiste la mano</p>
+            {% elif resultado == "empate" %}
+                <p class="empate">Empate</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
             <span>{{puntaje_dealer}}</span>
             <div class="cartas-d">
                 <div class="mazo"><img src="{{ url_for('static', filename='imagenes/back_dark.png') }}" alt="mazo"></div>
@@ -28,10 +40,10 @@
         </div>
 
         <div class="acciones">
-            <a href="/pedir"><button class="btn bg-info">Pedir</button></a>
-            <a href="/plantarse"><button class="btn bg-secondary">Plantarse</button></a>
-           <a href="/all"><button class="btn bg-danger ">All In</button></a>
-            <a href="/doblar"><button class="btn bg-warning">Doblar</button></a>    
+            <a href="/pedir"><button class="btn bg-info" id="btnPedir">Pedir</button></a>
+            <a href="/plantarse"><button class="btn bg-secondary" id="btnPlantarse">Plantarse</button></a>
+           <a href="/all"><button class="btn bg-danger" id="btnAll">All In</button></a>
+            <a href="/doblar"><button class="btn bg-warning" id="btnDoblar">Doblar</button></a>    
         </div>
 
         <div class="info-jugador">
@@ -41,11 +53,11 @@
             </div>
             {% if not apuesta_actual %}
             <div class="cont-ficha">
-            <a href="/partida/5"><button class="ficha1">5</button></a>
-            <a href="/partida/10"><button class="ficha2">10</button></a>
-            <a href="/partida/25"><button class="ficha3">25</button></a>
-            <a href="/partida/50"><button class="ficha4">50</button></a>
-            <a href="/partida/100"><button class="ficha5">100</button></a>
+            <a href="/partida/5"><button class="ficha1" id="btn5">5</button></a>
+            <a href="/partida/10"><button class="ficha2" id="btn10">10</button></a>
+            <a href="/partida/25"><button class="ficha3" id="btn25">25</button></a>
+            <a href="/partida/50"><button class="ficha4" id="btn50">50</button></a>
+            <a href="/partida/100"><button class="ficha5" id="btn100">100</button></a>
             </div>
             {% endif %}
         </div>

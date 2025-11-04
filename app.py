@@ -78,15 +78,38 @@ def pedir_c():
                             puntaje_jugador=calcular_mano(mano)
     )
 
-@app.route("/doblar/<int:fichas>")
-def doblar_a(fichas):
+@app.route("/doblar")
+def doblar_a():
+    mazo=session.get("mazo",[])
     saldo=session.get("saldo")
-    apuesta=session.get("apuesta_actual")
-    mano=session.get("mano")
-    mano_d=session.get("mano_d")
+    descarte=session.get("descarte",[])
+    apuesta_actual=session.get("apuesta_actual")
+    mano=session.get("mano",[])
+    mano_d=session.get("mano_d",[])
 
+    saldo, apuesta_actual, mano, mazo, descarte, puntaje_jugador = doblar(saldo, apuesta_actual, mano, mazo, descarte)
+    
+    saldo, puntaje_jugador, puntaje_dealer, resultado = jugadas(saldo, mano_d, mazo, apuesta_actual, mano, descarte)
 
+    session["mazo"]=mazo
+    session["saldo"]=saldo
+    session["apuesta_actual"]=apuesta_actual
+    session["mano"]=mano
+    session["mano_d"]=mano_d
+    session["descarte"]=descarte
 
+    mano_imagen=imagen_carta(mano)
+    mano_imagen_d=imagen_carta(mano_d,tapada=False)
+
+    return render_template("index.html",
+                            mano_imagen=mano_imagen,
+                            mano_imagen_d=mano_imagen_d,
+                            saldo=saldo,
+                            apuesta=apuesta_actual,
+                            puntaje_jugador=puntaje_jugador,
+                            puntaje_dealer=puntaje_dealer,
+                            resultado=resultado
+    )
 
 
 
