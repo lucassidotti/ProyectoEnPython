@@ -6,6 +6,7 @@ app.secret_key = "una_clave_super_segura"
 
 @app.route("/")
 def inicio():
+    session.clear()
     saldo=session.get("saldo",5000)
     session["saldo"]=saldo
     fichas = {5:5, 10:10, 25:25, 50:50, 100:100}
@@ -62,20 +63,39 @@ def pedir_c():
     mano=session.get("mano",[])
     mano_d=session.get("mano_d",[])
     descarte=session.get("descarte",[])
+    saldo=session.get("saldo")
+    apuesta_actual=session.get("apuesta_actual")
+
     pedir(mano,mazo,descarte)
+
+    puntaje_jugador=calcular_mano(mano)
+    puntaje_dealer=calcular_mano(mano_d)
+    session["puntaje_jugador"]=puntaje_jugador
+    session["puntaje_dealer"]=puntaje_dealer
+
+    resultado=""
+    if puntaje_jugador > 21:
+        saldo,puntaje_jugador,puntaje_dealer,resultado=jugadas(saldo,mano_d,mazo,apuesta_actual,mano,descarte)
+        mano_imagen_d=imagen_carta(mano_d,tapada=False)
+    else:
+        mano_imagen_d=imagen_carta(mano_d,tapada=True)
+    
     session["mazo"]=mazo
     session["mano"]=mano
     session["descarte"]=descarte
-    
+    session["saldo"]=saldo
+    session["apuesta_actual"]=apuesta_actual
+
     mano_imagen=imagen_carta(mano)
-    mano_imagen_d=imagen_carta(mano_d,tapada=True)
 
     return render_template("index.html",
                             mano_imagen=mano_imagen,
                             mano_imagen_d=mano_imagen_d,
-                            saldo=session["saldo"],
-                            apuesta=session["apuesta_actual"],
-                            puntaje_jugador=calcular_mano(mano)
+                            saldo=saldo,
+                            apuesta=apuesta_actual,
+                            puntaje_jugador=puntaje_jugador,
+                            puntaje_dealer=puntaje_dealer,
+                            resultado=resultado
     )
 
 @app.route("/doblar")
