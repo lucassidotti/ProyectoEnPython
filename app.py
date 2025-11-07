@@ -46,8 +46,12 @@ def partida(fichas):
         session["descarte"]=descarte
 
     mano_imagen=imagen_carta(mano)
-
     mano_imagen_d=imagen_carta(mano_d,tapada=True)
+    
+    saldo,puntaje_jugador,apuesta_actual,resultado=black_jack_n(saldo,apuesta_actual,mano,mano_d)
+
+    if resultado=="blackjack":
+        mano_imagen_d=imagen_carta(mano_d,tapada=False)
 
     return render_template("index.html", 
                            saldo=saldo, 
@@ -55,7 +59,9 @@ def partida(fichas):
                            mano_imagen_d=mano_imagen_d, 
                            mano_imagen=mano_imagen, 
                            cartas_dealer=mano_d,
-                           puntaje_jugador=calcular_mano(mano))
+                           puntaje_jugador=puntaje_jugador,
+                           resultado=resultado
+                           )
 
 @app.route("/pedir")
 def pedir_c():
