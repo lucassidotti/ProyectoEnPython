@@ -4,149 +4,177 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto';
 }
 
 .encabezado {
   height: 100px;
+  background-color: whitesmoke;
 }
 
-/* Tablero */
 .tablero {
-  display: grid;
-  grid-template-areas:
-    "dealer dealer"
-    "jugada jugada"
-    "info acciones";
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 1fr auto;
-  gap: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
   width: 100%;
   height: calc(100vh - 100px);
-  background-color: #4b6349; /* Tu verde original */
+  background-color: #4b6349;
   padding: 1.5em;
+  gap: 2.5em;
 }
 
-/* Dealer */
 .dealer {
-  grid-area: dealer;
-  text-align: center;
-  font-size: 1.4em;
-  color: white;
-  padding: 0.8em;
-  border-radius: 0.8em;
-  border: 2px dashed rgba(255, 255, 255, 0.4);
-}
-.mazo {
   display: flex;
-  margin-left: 0;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  color: whitesmoke;
+  font-size: 1.2em;
+  padding: 1em;
+  border-radius: 8px;
+  border: 2px dashed rgba(182, 173, 173, 0.3);
 }
+
 .cartas-d {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1em;
-  margin-top: 0.5em;
+  margin-top: 8px;
 }
 
-/* Mano */
-.jugada {
-  grid-area: jugada;
+.mazo {
   display: flex;
   justify-content: center;
-  align-items: end;
-  position: relative;
+  align-items: center;
+}
+
+.jugada {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: whitesmoke;
+  font-size: 1.2em;
+  padding: 1em;
+  border-radius: 8px;
+  border: 2px dashed rgba(182, 173, 173, 0.3);
 }
 
 .total {
-  position: absolute;
-  top: 5em;
-  font-size: 1.3em;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
   color: #fff;
-  font-weight: 600;
+  font-weight: bold;
+  text-align: center;
 }
 
-.carta img{
-  width: auto;
-  height: auto;
-  margin: 0 0.8em;
-}
-
-/* Info jugador */
-.info-jugador {
-  grid-area: info;
+.cartas-jugador {
   display: flex;
-  justify-content: space-between; 
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: nowrap;  
+  gap: 1em;
+  width: 100%;
+}
+
+.carta {
+
+  display: inline-flex;
+}
+
+.carta img {
+  height: 200px;
+  width: auto;
+  display: block;
+}
+
+.cartas-d img {
+  max-height: 200px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.cont-info {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  border: 2px dashed rgba(255,255,255,0.3);
-  border-radius: 10px;
+  width: 100%;
+  gap: 1em;
+  color: whitesmoke;
+}
+
+.acciones {
+  max-width: max-content;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+  flex: 1;
+  flex-wrap: nowrap;
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 8px;
   padding: 1em;
-  color: #fff;
-  font-size: 1.1em;
+}
+
+.acciones a {
+  text-decoration: none;
+}
+
+.acciones button {
+  font-size: 1em;
+  padding: 1em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.info-jugador {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1em;
+  flex: 0 0 auto;
+  text-align: right;
+  font-size: 1em;
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 1em;
 }
 
 .cont-apuesta {
   display: flex;
   flex-direction: column;
-  gap: 0.3em;
+  gap: 4px;
 }
 
-/* Fichas */
 .cont-ficha {
   display: flex;
-  justify-content: flex-end;
+  gap: 8px;
   align-items: center;
-  gap: 0.6em;
+  justify-content: flex-end;
 }
 
 .ficha1, .ficha2, .ficha3, .ficha4, .ficha5 {
-  width: 3em;
-  height: 3em;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: none;
+  color: whitesmoke;
   font-weight: bold;
-  font-size: 1em;
   cursor: pointer;
-  color: #fff;
-  transition: transform 0.2s ease;
 }
 
-.ficha1 { background-color: #c0392b; } 
-.ficha2 { background-color: #2980b9; } 
-.ficha3 { background-color: #27ae60; } 
-.ficha4 { background-color: #f39c12; } 
-.ficha5 { background-color: #8e44ad; } 
+.ficha1 { background-color: #c0392b; }
+.ficha2 { background-color: #2980b9; }
+.ficha3 { background-color: #27ae60; }
+.ficha4 { background-color: #f39c12; }
+.ficha5 { background-color: #8e44ad; }
 
-.ficha:hover {
-  transform: scale(1.1);
-}
-
-/*Menu de acciones*/
-.acciones {
-  grid-area: acciones;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border: 2px dashed rgba(255,255,255,0.3);
-  border-radius: 10px;
-  padding: 0.8em;
-}
-
-.acciones button {
-  font-size: 1em;
-  padding: 0.6em 1.2em;
-  border: none;
-  border-radius: 0.5em;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.1s ease
-}
-
-.acciones button:hover {
-  transform: scale(1.05);
-}
-
-footer{
+footer {
   background-color: #121212;
   height: 200px;
 }

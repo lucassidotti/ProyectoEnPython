@@ -36,11 +36,13 @@
         </div>
         <div class="jugada">
             <span class="total">{{puntaje_jugador}}</span>
+            <div class="cartas-jugador">
             {% for imagen in mano_imagen %}
                 <div class="carta"><img src="{{ url_for('static', filename=imagen) }}" alt="carta"></div>
             {% endfor %}
+            </div>
         </div>
-
+        <div class="cont-info">
         <div class="acciones">
             <a href="/pedir"><button class="btn bg-info" id="btnPedir">Pedir</button></a>
             <a href="/plantarse"><button class="btn bg-secondary" id="btnPlantarse">Plantarse</button></a>
@@ -66,8 +68,9 @@
             </div>
             {% endif %}
         </div>
+        </div>
     </div>
-<footer>d</footer>
+<footer></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
