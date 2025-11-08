@@ -44,8 +44,9 @@
         <div class="acciones">
             <a href="/pedir"><button class="btn bg-info" id="btnPedir">Pedir</button></a>
             <a href="/plantarse"><button class="btn bg-secondary" id="btnPlantarse">Plantarse</button></a>
-           <a href="/all"><button class="btn bg-danger" id="btnAll">All In</button></a>
-            <a href="/doblar"><button class="btn bg-warning" id="btnDoblar">Doblar</button></a>    
+            <a href="/doblar"><button class="btn bg-danger" id="btnDoblar">Doblar</button></a> 
+            <a href="{{ url_for('nueva_mano') }}"><button class="btn bg-primary">Nueva mano</button></a>  
+            <a href="{{ url_for('nueva_partida') }}"><button class="btn bg-warning">Reiniciar partida</button></a> 
         </div>
 
         <div class="info-jugador">
@@ -60,6 +61,8 @@
             <a href="/partida/25"><button class="ficha3" id="btn25">25</button></a>
             <a href="/partida/50"><button class="ficha4" id="btn50">50</button></a>
             <a href="/partida/100"><button class="ficha5" id="btn100">100</button></a>
+            <a href="{{ url_for('partida', fichas=saldo) }}"><button class="btn bg-danger">All In</button></a>
+
             </div>
             {% endif %}
         </div>

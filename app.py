@@ -1,5 +1,5 @@
-from flask import Flask, render_template, session, redirect, url_for, request
-from blackjack_logic import crear_mazo, barajar, calcular_mano, apuestas_jugador, black_jack_n, pedir, doblar, plantarse, turno_dealer, jugadas, imagen_carta
+from flask import Flask, render_template, session
+from blackjack_logic import crear_mazo, barajar, calcular_mano, apuestas_jugador, black_jack_n, pedir, doblar, jugadas, imagen_carta
 
 app =Flask(__name__)
 app.secret_key = "una_clave_super_segura"
@@ -30,27 +30,29 @@ def partida(fichas):
     mano_d=session.get("mano_d",[])
     descarte=session.get("descarte",[])
 
-    if not apuesta_actual:
+    if fichas==saldo:
+        apuesta_actual=saldo
+        saldo=0
+       
+    elif not apuesta_actual:
         saldo, apuesta_actual=apuestas_jugador(saldo,fichas)
-        session["saldo"]=saldo
-        session["apuesta_actual"]=apuesta_actual
-        mazo=crear_mazo()
-        mazo, mano, mano_d, descarte=barajar(mazo)
-        session["mazo"]=mazo
-        session["mano"]=mano
-        session["mano_d"]=mano_d
-        session["descarte"]=descarte
-    else:
-        session["mano"]=mano
-        session["mano_d"]=mano_d
-        session["descarte"]=descarte
+
+    session["saldo"]=saldo
+    session["apuesta_actual"]=apuesta_actual
+
+    mazo=crear_mazo()
+    mazo, mano, mano_d, descarte=barajar(mazo)
+    session["mazo"]=mazo
+    session["mano"]=mano
+    session["mano_d"]=mano_d
+    session["descarte"]=descarte
 
     mano_imagen=imagen_carta(mano)
     mano_imagen_d=imagen_carta(mano_d,tapada=True)
     
     saldo,puntaje_jugador,apuesta_actual,resultado=black_jack_n(saldo,apuesta_actual,mano,mano_d)
 
-    if resultado=="blackjack":
+    if resultado=="blackjack" or resultado=="pierde" or resultado=="empate":
         mano_imagen_d=imagen_carta(mano_d,tapada=False)
 
     return render_template("index.html", 
@@ -100,7 +102,6 @@ def pedir_c():
                             saldo=saldo,
                             apuesta=apuesta_actual,
                             puntaje_jugador=puntaje_jugador,
-                            puntaje_dealer=puntaje_dealer,
                             resultado=resultado
     )
 
@@ -137,18 +138,62 @@ def doblar_a():
                             resultado=resultado
     )
 
+@app.route("/plantarse")
+def plantarse_p():
+    mazo=session.get("mazo",[])
+    saldo=session.get("saldo")
+    descarte=session.get("descarte",[])
+    apuesta_actual=session.get("apuesta_actual")
+    mano=session.get("mano",[])
+    mano_d=session.get("mano_d",[])
 
+    saldo, puntaje_jugador, puntaje_dealer, resultado = jugadas(saldo, mano_d, mazo, apuesta_actual, mano, descarte)
 
+    session["mazo"]=mazo
+    session["saldo"]=saldo
+    session["apuesta_actual"]=apuesta_actual
+    session["mano"]=mano
+    session["mano_d"]=mano_d
+    session["descarte"]=descarte
 
+    mano_imagen=imagen_carta(mano)
+    mano_imagen_d=imagen_carta(mano_d,tapada=False)
 
+    return render_template("index.html",
+                            mano_imagen=mano_imagen,
+                            mano_imagen_d=mano_imagen_d,
+                            saldo=saldo,
+                            apuesta=apuesta_actual,
+                            puntaje_jugador=puntaje_jugador,
+                            puntaje_dealer=puntaje_dealer,
+                            resultado=resultado
+    )
 
+@app.route("/nueva_mano")
+def nueva_mano():
+    saldo=session.get("saldo")
+    session.clear()
+    session["saldo"]=saldo
+    return render_template("index.html",
+                           saldo=saldo,
+                           apuesta=0,
+                           mano=[],
+                           mano_d=[],
+                           puntaje_jugador=0,
+                           resultado=""
+                           )
 
-
-
-
-
-
-
+@app.route("/nueva_partida")
+def nueva_partida():
+    session.clear()
+    return render_template("index.html",
+                           saldo=5000,
+                           apuesta=0,
+                           mano=[],
+                           mano_d=[],
+                           puntaje_jugador=0,
+                           resultado=""
+                           )
 
 
 

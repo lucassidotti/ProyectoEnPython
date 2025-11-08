@@ -65,6 +65,7 @@ def black_jack_n(saldo, apuesta_actual,mano,mano_d):
     puntaje_jugador = calcular_mano(mano)
     puntaje_dealer = calcular_mano(mano_d)
     resultado = ""
+
     if puntaje_jugador==21 and len(mano)==2:
         if puntaje_dealer==21 and len(mano_d)==2:
             saldo += apuesta_actual
@@ -72,6 +73,9 @@ def black_jack_n(saldo, apuesta_actual,mano,mano_d):
         else:
             saldo+=int(apuesta_actual*2.5)
             resultado="blackjack"
+    elif puntaje_dealer==21 and len(mano_d)==2:
+            resultado="pierde"
+
     return saldo,puntaje_jugador,apuesta_actual, resultado
 
 def pedir(mano,mazo,descarte):
