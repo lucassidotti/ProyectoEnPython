@@ -13,6 +13,13 @@
         <h1>Black Jack!</h1>
     </header>
     <div class="tablero">
+        <div class="info">
+            <div class="cont-apuesta">
+                <p class="saldo">Saldo: ${{saldo}}</p>
+                <p class="apuesta">Apuesta: ${{apuesta}}</p>
+            </div>
+            <img src="/static/imagenes/info.svg" alt="">
+        </div>
         <div class="dealer">
         {% if resultado %}
         <div class="resultado">
@@ -54,10 +61,6 @@
         </div>
 
         <div class="info-jugador">
-            <div class="cont-apuesta">
-            <p class="saldo">Saldo: ${{saldo}}</p>
-            <p class="apuesta">Apuesta: ${{apuesta}}</p>
-            </div>
             {% if not apuesta_actual %}
             <div class="cont-ficha">
             <a href="/partida/5"><button class="ficha1" id="btn5">5</button></a>
@@ -66,7 +69,6 @@
             <a href="/partida/50"><button class="ficha4" id="btn50">50</button></a>
             <a href="/partida/100"><button class="ficha5" id="btn100">100</button></a>
             <a href="{{ url_for('partida', fichas=saldo) }}"><button class="btn bg-danger">All In</button></a>
-
             </div>
             {% endif %}
         </div>

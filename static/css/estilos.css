@@ -13,6 +13,26 @@
   display: none;
 }
 
+.info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  width: 100%;
+}
+
+.cont-apuesta{
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-start;
+  align-items: center;
+
+}
+
+.info img{
+  width: 30px;
+}
+
 .tablero {
   background-color: #006400;
   display: flex;
@@ -21,6 +41,7 @@
   gap: 1.2em;
   padding: 1rem;
   color: whitesmoke;
+  height: 100vh;
 }
 
 .dealer, .jugada {
@@ -69,7 +90,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.5em;
 }
 
 .ficha1,.ficha2,.ficha3,.ficha4,.ficha5 {
