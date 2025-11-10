@@ -2,7 +2,7 @@ from flask import Flask, render_template, session
 from blackjack_logic import crear_mazo, barajar, calcular_mano, apuestas_jugador, black_jack_n, pedir, doblar, jugadas, imagen_carta
 
 app =Flask(__name__)
-app.secret_key = "una_clave_super_segura"
+app.secret_key = "clave_segura"
 
 @app.route("/")
 def inicio():

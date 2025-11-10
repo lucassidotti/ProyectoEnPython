@@ -6,18 +6,14 @@
   box-sizing: border-box;
   font-family: 'Roboto';
 }
-body {
-  margin: 0;
-  font-family: sans-serif;
-  text-align: center;
-}
 
 .encabezado{
   background-color: whitesmoke;
   height: 100px;
+  color: #121212;
+  text-align: center;
 }
 
-/* tablero */
 .tablero {
   background-color: #006400;
   display: flex;
@@ -26,10 +22,8 @@ body {
   gap: 1.2em;
   padding: 1rem;
   color: whitesmoke;
-  height: calc(100vh - 100px);
 }
 
-/* dealer y jugador */
 .dealer, .jugada {
   display: flex;
   flex-direction: column;
@@ -58,7 +52,6 @@ body {
   border-radius: 6px;
 }
 
-/* botones y fichas */
 .cont-info {
   width: 100%;
   display: flex;
@@ -96,8 +89,3 @@ body {
 .ficha4 { background-color: #f39c12; }
 .ficha5 { background-color: #8e44ad; }
 
-footer{
-  background-color: #121212;
-  color: whitesmoke;
-  height: 300px;
-}
