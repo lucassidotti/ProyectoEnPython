@@ -8,10 +8,9 @@
 }
 
 .encabezado{
-  background-color: whitesmoke;
-  height: 100px;
-  color: #121212;
   text-align: center;
+  background-color: #006400;
+  display: none;
 }
 
 .tablero {
@@ -89,3 +88,8 @@
 .ficha4 { background-color: #f39c12; }
 .ficha5 { background-color: #8e44ad; }
 
+footer{
+  background-color: #121212;
+  color: whitesmoke;
+  display: none;
+}
