@@ -9,9 +9,32 @@
 
 </head>
 <body>
-    <header class="encabezado">
-        <h1>Black Jack!</h1>
-    </header>
+    {% if not session.get("registrado") %}
+    <div id="overlay" class="overlay">
+        <div class="pop-up">
+            <h2>Bienvenido al BlackJack en Python</h2>
+
+            <p class="info-over">Si tenés <span class="gold">18 años o más</span> Registrate y jugá</p>
+
+            <form action="/agregar" method="POST" id="form">
+                <input type="text" id="formName" name="nombre" placeholder="Nombre completo">
+                    <span id="msjNombre"></span>
+                <input type="email" id="formMail" name="mail" placeholder="Email">
+                    <span id="msjMail"></span>
+                <input type="tel" id="formTel" name="tel" placeholder="Teléfono">
+                    <span id="msjTel"></span>
+                <input type="date" id="formEdad" name="fechaNac">
+                    <span id="msjFechaNac"></span>
+                <button type="submit" class="btn-ingresar">Ingresá y jugá!</button>
+            </form>
+
+            <button class="btn-menor" id="btnMenor">Soy menor de edad</button>
+
+            <p class="legal">Si sos menor... No podes jugar, diria el Dibu</p>
+        </div>
+    </div>
+    {% endif %}
+
     <div class="tablero">
         <div class="info">
             <div class="cont-apuesta">
@@ -81,6 +104,6 @@
     </div>
     </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+<script src="{{ url_for('static', filename='javaScript/scripts.js') }}"></script>
 </body>
 </html>

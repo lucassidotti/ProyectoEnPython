@@ -1,12 +1,12 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, request, url_for, redirect
 from blackjack_logic import crear_mazo, barajar, calcular_mano, apuestas_jugador, black_jack_n, pedir, doblar, jugadas, imagen_carta
+import csv
 
 app =Flask(__name__)
 app.secret_key = "clave_segura"
 
 @app.route("/")
 def inicio():
-    session.clear()
     saldo=session.get("saldo",5000)
     session["saldo"]=saldo
     fichas = {5:5, 10:10, 25:25, 50:50, 100:100}
@@ -172,8 +172,10 @@ def plantarse_p():
 @app.route("/nueva_mano")
 def nueva_mano():
     saldo=session.get("saldo")
+    registrado=session.get("registrado")
     session.clear()
     session["saldo"]=saldo
+    session["registrado"]=registrado
     return render_template("index.html",
                            saldo=saldo,
                            apuesta=0,
@@ -185,7 +187,10 @@ def nueva_mano():
 
 @app.route("/nueva_partida")
 def nueva_partida():
+    registrado=session.get("registrado")
     session.clear()
+    session["registrado"]=registrado
+    session["saldo"] = 5000
     return render_template("index.html",
                            saldo=5000,
                            apuesta=0,
@@ -195,6 +200,17 @@ def nueva_partida():
                            resultado=""
                            )
 
+@app.route("/agregar",methods=["POST"])
+def perfilJugador():
+    nombre=request.form["nombre"]
+    mail=request.form["mail"]
+    tel=request.form["tel"]
+    fechaNac=request.form["fechaNac"]
+    with open("datos.csv","a",newline="")as archivo:
+        writer=csv.writer(archivo)
+        writer.writerow([nombre,mail,tel,fechaNac])
+    session["registrado"]=True
+    return redirect("/")
 
 
 

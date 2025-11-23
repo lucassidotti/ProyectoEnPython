@@ -6,12 +6,107 @@
   box-sizing: border-box;
   font-family: 'Roboto';
 }
-
-.encabezado{
-  text-align: center;
-  background-color: #006400;
-  display: none;
+/*Estilos overlay */
+.overlay {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.7) 80%);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
+
+.pop-up {
+    background: #151515;
+    width: 400px;
+    padding: 1.5em;
+    border-radius: 15px;
+    border: 2px solid #d4af37; 
+    box-shadow: 0 0 25px rgba(212,175,55,0.4);
+    text-align: center;
+    font-family: "Playfair Display", serif;
+}
+
+.pop-up h2 {
+    color: #d4af37;
+    margin-bottom: 1em;
+}
+
+.info-over {
+    color: #777;
+    margin-bottom: 1em;
+    font-size: 1em;
+}
+
+.gold {
+    color: #d4af37;
+    font-weight: bold;
+}
+
+.pop-up input {
+    width: 90%;
+    padding: 0.8em;
+    margin-bottom: 1em;
+    border-radius: 8px;
+    border: 1px solid #777;
+    background: #121212;
+    color: white;
+    font-size: 1em;
+    transition: 0.5s ease;
+}
+
+.pop-up input:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 8px #93771a;
+}
+
+.btn-ingresar {
+    width: 100%;
+    padding: 0.8em;
+    background-color: #d4af37;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: 0.5s ease;
+    margin-bottom: 0.5em;
+}
+
+.btn-ingresar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #93771a;
+}
+
+.btn-menor {
+    width: 100%;
+    padding: 0.8em;
+    background: #600000;
+    color: #ffbcbc;
+    border: 1px solid #993333;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.5s ease;
+}
+
+.btn-menor:hover {
+    background: #8e0000;
+    transform: scale(1.05);
+}
+
+.legal {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 10px;
+}
+/*Fin estilos overlay*/
 
 .info{
   display: flex;
