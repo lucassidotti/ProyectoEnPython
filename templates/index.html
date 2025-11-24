@@ -14,7 +14,7 @@
         <div class="pop-up">
             <h2>Bienvenido al BlackJack en Python</h2>
 
-            <p class="info-over">Si tenés <span class="gold">18 años o más</span> Registrate y jugá</p>
+            <p class="info-over">Si tenés <span class="resaltado">18 años o más</span> Registrate y jugá</p>
 
             <form action="/agregar" method="POST" id="form">
                 <input type="text" id="formName" name="nombre" placeholder="Nombre completo">
@@ -36,12 +36,18 @@
     {% endif %}
 
     <div class="tablero">
-        <div class="info">
+        <div class="info" >
             <div class="cont-apuesta">
                 <p class="saldo">Saldo: ${{saldo}}</p>
                 <p class="apuesta">Apuesta: ${{apuesta}}</p>
             </div>
-            <img src="/static/imagenes/info.svg" alt="">
+              <button type="button" class="btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="/static/imagenes/info.svg" alt="">
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/info" id="btnJugador">Jugadores</a></li>
+                <li><a class="dropdown-item" href="/info" id="btnProyect">Proyecto</a></li>
+            </ul>
         </div>
         <div class="dealer">
         {% if resultado %}

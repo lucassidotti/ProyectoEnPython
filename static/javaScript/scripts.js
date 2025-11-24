@@ -73,3 +73,5 @@ btnMenor.addEventListener('click',()=>{
     window.location.href="https://www.youtube.com/@BlueyEspanol";
 })
 
+
+
