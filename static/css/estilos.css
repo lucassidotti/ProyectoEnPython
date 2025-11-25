@@ -29,7 +29,7 @@
     box-shadow: 0 0 25px #93771a;
     text-align: center;
     font-family: "Playfair Display", serif;
-    height: 100vh;
+    height: auto;
 }
 
 .pop-up h2 {
